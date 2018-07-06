@@ -11,6 +11,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "osgRefPtr", "osgRefPtr\osgR
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "osgBasicPrimitives", "osgBasicPrimitives\osgBasicPrimitives.vcxproj", "{0A1C6478-B224-4F6B-8801-F781AED37524}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "osgMatrixOperations", "osgMatrixOperations\osgMatrixOperations.vcxproj", "{073C09DB-E14A-4755-AFB5-43BB2091D4D4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CBDB09BC-1C1E-49E4-B761-C5BE4F393EF7} = {CBDB09BC-1C1E-49E4-B761-C5BE4F393EF7}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +56,14 @@ Global
 		{0A1C6478-B224-4F6B-8801-F781AED37524}.Release|x64.Build.0 = Release|x64
 		{0A1C6478-B224-4F6B-8801-F781AED37524}.Release|x86.ActiveCfg = Release|Win32
 		{0A1C6478-B224-4F6B-8801-F781AED37524}.Release|x86.Build.0 = Release|Win32
+		{073C09DB-E14A-4755-AFB5-43BB2091D4D4}.Debug|x64.ActiveCfg = Debug|x64
+		{073C09DB-E14A-4755-AFB5-43BB2091D4D4}.Debug|x64.Build.0 = Debug|x64
+		{073C09DB-E14A-4755-AFB5-43BB2091D4D4}.Debug|x86.ActiveCfg = Debug|Win32
+		{073C09DB-E14A-4755-AFB5-43BB2091D4D4}.Debug|x86.Build.0 = Debug|Win32
+		{073C09DB-E14A-4755-AFB5-43BB2091D4D4}.Release|x64.ActiveCfg = Release|x64
+		{073C09DB-E14A-4755-AFB5-43BB2091D4D4}.Release|x64.Build.0 = Release|x64
+		{073C09DB-E14A-4755-AFB5-43BB2091D4D4}.Release|x86.ActiveCfg = Release|Win32
+		{073C09DB-E14A-4755-AFB5-43BB2091D4D4}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
