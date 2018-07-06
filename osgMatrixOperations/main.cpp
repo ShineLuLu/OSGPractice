@@ -7,8 +7,24 @@
 
 #include<osgViewer/Viewer>
 #include<osgDB/ReadFile>
+#include<osgViewer/ViewerEventHandlers>
+
+osg::ref_ptr<osg::Node> MatrixOperate();
 
 int main() {
+	osg::ref_ptr<osgViewer::Viewer> viewer = new osgViewer::Viewer;
+	osg::ref_ptr<osg::Group> group = new osg::Group;
 
-	return 0;
+	group->addChild(osgDB::readNodeFile("glider.osg"));
+
+	viewer->setSceneData(group);
+	viewer->addEventHandler(new osgViewer::StatsHandler);
+
+	return viewer->run();
+}
+
+osg::ref_ptr<osg::Node> MatrixOperate()
+{
+
+	return osg::ref_ptr<osg::Node>();
 }
