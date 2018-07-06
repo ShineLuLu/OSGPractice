@@ -11,6 +11,7 @@
 #include<osg/ShapeDrawable>
 #include<osg/Material>
 #include<osgViewer/ViewerEventHandlers>
+#include<osg/LineWidth>
 
 
 osg::ref_ptr<osg::Geode> CreateBox();
@@ -64,8 +65,10 @@ osg::ref_ptr<osg::Geode> CreateBox() {
 	if (image.valid()) {
 		t2d->setImage(0, image.get());
 	}
-	geode->getOrCreateStateSet()->setTextureAttributeAndModes(0, t2d.get(), osg::StateAttribute::ON);
 
+	/*使用下面注释掉的方法会出现warning*/
+	geode->getOrCreateStateSet()->setTextureAttributeAndModes(0, t2d.get(), osg::StateAttribute::ON);
+	/*geode->getOrCreateStateSet()->setAttributeAndModes(t2d.get(),osg::StateAttribute::ON);*/
 
 	geode->addDrawable(drawable.get());
 
@@ -79,8 +82,13 @@ osg::ref_ptr<osg::Node> CreateSimpleNode()
 	osg::ref_ptr<osg::Image> image;
 	osg::ref_ptr<osg::Texture2D> t2d = new osg::Texture2D;
 	osg::ref_ptr<osg::Material> material = new osg::Material;
+	osg::ref_ptr<osg::Vec3Array> coord = new osg::Vec3Array;
 	osg::ref_ptr<osg::Vec4Array> colors = new osg::Vec4Array;
 	osg::ref_ptr<osg::Vec3Array> normals = new osg::Vec3Array;
+	osg::ref_ptr<osg::LineWidth> width = new osg::LineWidth;
+
+	/*设置线宽*/
+	width->setWidth(5.0);
 
 	/*设置光照*/
 	material->setDiffuse(osg::Material::Face::FRONT_AND_BACK, osg::Vec4(0.4, 0.5, 0.6, 0.3));
@@ -93,8 +101,7 @@ osg::ref_ptr<osg::Node> CreateSimpleNode()
 		t2d->setImage(0, image.get());
 	}
 
-	osg::ref_ptr<osg::Vec3Array> coord = new osg::Vec3Array;
-	geome->addPrimitiveSet(new osg::DrawArrays(osg::PrimitiveSet::Mode::QUADS, 0, 4));
+	geome->addPrimitiveSet(new osg::DrawArrays(osg::PrimitiveSet::Mode::LINE_LOOP, 0, 4));
 	geome->setVertexArray(coord.get());
 	geome->setColorArray(colors.get(), osg::Array::Binding::BIND_PER_VERTEX);
 	geome->setNormalArray(normals, osg::Array::Binding::BIND_OVERALL);
@@ -114,6 +121,8 @@ osg::ref_ptr<osg::Node> CreateSimpleNode()
 	/*设置的为自身的法线？ 光照向y轴负轴，y取-1反转图形，将照亮的面置于前面*/
 	normals->push_back(osg::Vec3(0.0, -1.0, 0.0));
 
+
+	geode->getOrCreateStateSet()->setAttribute(width.get(), osg::StateAttribute::ON);
 	//geode->getOrCreateStateSet()->setAttributeAndModes(material.get(), osg::StateAttribute::ON);
 	geode->getOrCreateStateSet()->setMode(GL_BLEND, osg::StateAttribute::ON);
 	//geode->getOrCreateStateSet()->setTextureAttributeAndModes(0, t2d.get(), osg::StateAttribute::ON);
