@@ -1,4 +1,5 @@
 # OSGPractice
-OSG Practice Project
-OpenSceneGraph
-Aoi ShineLuLu 
+ - OSG Practice Project
+
+ - OpenSceneGraph
+ > Aoi ShineLuLu 
