@@ -31,11 +31,20 @@ public:
 	void toScale(const osg::Matrix& mat);
 	/*缩放模型*/
 	void toScale(float scale);
+	/*将模型移到目的点*/
+	void toPosition(const osg::Vec3& pos);
 	/*重写的addchild方法*/
 	void addChilds(osg::Node* node);
+	/*调整模型大小*/
+	void adapt(const osg::BoundingSphere area);
+	/*调整模型大小*/
+	void adapt(osg::Node* node);
 
 private:
 	osg::ref_ptr<osg::MatrixTransform> instance;
+	osg::BoundingSphere lastChildBound;
+	osg::ref_ptr<osg::Node> lastAddedNode;
+	float lastScale;
 };
 
 
