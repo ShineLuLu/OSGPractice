@@ -1,0 +1,11 @@
+#include "Travel.h"
+
+int main() {
+	osg::ref_ptr<osgViewer::Viewer> viewer = new osgViewer::Viewer;
+	osg::ref_ptr<osg::Node> node = osgDB::readNodeFile("cow.osg");
+
+	viewer->setSceneData(node.get());
+	viewer->addEventHandler(new osgViewer::StatsHandler);
+	return viewer->run();
+}
+
