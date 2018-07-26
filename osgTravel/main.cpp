@@ -5,7 +5,7 @@ int main() {
 	osg::ref_ptr<osg::Node> node = osgDB::readNodeFile("cow.osg");
 
 	viewer->setSceneData(node.get());
-	viewer->addEventHandler(new osgViewer::StatsHandler);
+	/*viewer->addEventHandler(new osgViewer::StatsHandler);*/
 	viewer->setCameraManipulator(new TravelManipulator());
 	return viewer->run();
 }

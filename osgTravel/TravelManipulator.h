@@ -26,9 +26,11 @@ public:
 	virtual void setTransformation(const osg::Vec3d & eye, const osg::Vec3d & center, const osg::Vec3d & up) override;
 	virtual void getTransformation(osg::Vec3d & eye, osg::Quat & rotation) const override;
 	virtual void getTransformation(osg::Vec3d & eye, osg::Vec3d & center, osg::Vec3d & up) const override;
+	virtual bool  handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIActionAdapter &us);
 private:
-	osg::Vec3 viewPoint;
+	osg::Vec3 m_vPosition;
 	osg::Vec3 orientation;
-
+	int steplength;
+	float rotatelength;
 };
 
