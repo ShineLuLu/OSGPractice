@@ -1,4 +1,4 @@
-#include "Travel.h"
+#include "TravelManipulator.h"
 
 int main() {
 	osg::ref_ptr<osgViewer::Viewer> viewer = new osgViewer::Viewer;
@@ -6,6 +6,7 @@ int main() {
 
 	viewer->setSceneData(node.get());
 	viewer->addEventHandler(new osgViewer::StatsHandler);
+	viewer->setCameraManipulator(new TravelManipulator());
 	return viewer->run();
 }
 

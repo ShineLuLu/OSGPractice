@@ -125,10 +125,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Travel.cpp" />
+    <ClCompile Include="TravelManipulator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Travel.h" />
+    <ClInclude Include="TravelManipulator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
