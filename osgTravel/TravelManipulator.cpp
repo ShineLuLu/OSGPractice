@@ -4,8 +4,10 @@
 
 TravelManipulator::TravelManipulator()
 {
-	m_vPosition = osg::Vec3(0.0, -10.0, 50.0);
-	orientation = osg::Vec3(0.0, 0.0, 0.0);
+	m_vPosition = osg::Vec3(0.0, 0.0, 0.0);
+	m_vRotate = osg::Vec3(osg::PI_2, 0.0, 0.0);
+	m_vStep = 1;
+	m_vRotateStep = 0.01;
 }
 
 
@@ -26,7 +28,7 @@ osg::Matrixd TravelManipulator::getMatrix() const
 	//osg::Matrixd mat;
 	///*mat.makeTranslate(m_vPosition);*/
 	osg::Matrixd mat = osg::Matrixd::translate(m_vPosition);
-	return mat * osg::Matrixd::rotate(orientation[0], osg::X_AXIS, orientation[1], osg::Y_AXIS, orientation[2], osg::Z_AXIS);
+	return mat * osg::Matrixd::rotate(m_vRotate[0], osg::X_AXIS, m_vRotate[1], osg::Y_AXIS, m_vRotate[2], osg::Z_AXIS);
 }
 
 osg::Matrixd TravelManipulator::getInverseMatrix() const
@@ -34,7 +36,7 @@ osg::Matrixd TravelManipulator::getInverseMatrix() const
 	/*osg::Matrixd mat;
 	mat.makeTranslate(m_vPosition);*/
 	osg::Matrixd mat = osg::Matrixd::translate(m_vPosition);
-	return osg::Matrixd::inverse(mat*osg::Matrixd::rotate(orientation[0], osg::X_AXIS, orientation[1], osg::Y_AXIS, orientation[2], osg::Z_AXIS));
+	return osg::Matrixd::inverse(mat*osg::Matrixd::rotate(m_vRotate[0], osg::X_AXIS, m_vRotate[1], osg::Y_AXIS, m_vRotate[2], osg::Z_AXIS));
 }
 
 void TravelManipulator::setTransformation(const osg::Vec3d & eye, const osg::Quat & rotation)
@@ -58,26 +60,50 @@ bool TravelManipulator::handle(const osgGA::GUIEventAdapter & ea, osgGA::GUIActi
 	switch (ea.getEventType())
 	{
 	case osgGA::GUIEventAdapter::KEYDOWN:
-		if (ea.getKey() == 'w') {
-			m_vPosition[2] -= 2;
-		}
 		switch (ea.getKey()) {
 		case 'w':
-			m_vPosition[2] -= 2;
+			changePostion(osg::Vec3(m_vStep*cosf(osg::PI_2 + m_vRotate._v[1]), 0.0, -m_vStep * sinf(osg::PI_2 + m_vRotate._v[1])));
 			break;
 		case 's':
-			m_vPosition[2] += 2;
+			changePostion(osg::Vec3(-m_vStep * cosf(osg::PI_2 + m_vRotate._v[1]), 0.0, m_vStep * sinf(osg::PI_2 + m_vRotate._v[1])));
+			break;
+		case 'q':
+			changePostion(osg::Vec3(m_vStep*cosf(osg::PI + m_vRotate._v[1]), 0.0, -m_vStep * sinf(osg::PI + m_vRotate._v[1])));
+			break;
+		case 'e':
+			changePostion(osg::Vec3(-m_vStep * cosf(osg::PI + m_vRotate._v[1]), 0.0, m_vStep * sinf(osg::PI + m_vRotate._v[1])));
 			break;
 		case 'a':
-			m_vPosition[0] += 2;
+			changeViewAngle(osg::Vec3(0.0, 0.0, m_vRotateStep));
 			break;
 		case 'd':
-			m_vPosition[0] -= 2;
+			changeViewAngle(osg::Vec3(0.0, 0.0, -m_vRotateStep));
 			break;
 		}
+		break;
+	case osgGA::GUIEventAdapter::PUSH:
+		if (ea.getKey() == osgGA::GUIEventAdapter::LEFT_MOUSE_BUTTON) {
+			m_iLeftX = ea.getX();
+			m_iLeftY = ea.getY();
+		}
+		break;
+	case osgGA::GUIEventAdapter::DRAG:
+		int deltX = ea.getX();
+		break;
+	case osgGA::GUIEventAdapter::RELEASE:
 		break;
 	default:
 		break;
 	}
 	return false;
+}
+
+void TravelManipulator::changePostion(const osg::Vec3 & step)
+{
+	m_vPosition += step;
+}
+
+void TravelManipulator::changeViewAngle(const osg::Vec3 & angle)
+{
+	m_vRotate += angle;
 }

@@ -7,6 +7,15 @@
 #pragma comment(lib,"../x64/Release/osgAddDepen.lib")
 #endif // _DEBUG
 
+#  if defined( OSG_LIBRARY_STATIC )
+#    define NODE_MATRIX
+#  elif defined( OSG_LIBRARY )
+#    define NODE_MATRIX   __declspec(dllexport)
+#  else
+#    define NODE_MATRIX   __declspec(dllimport)
+#endif // NODE_MATRIX
+
+
 #include<osgViewer/Viewer>
 #include<osgDB/ReadFile>
 #include<osgViewer/ViewerEventHandlers>

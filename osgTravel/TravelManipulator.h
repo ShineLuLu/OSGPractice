@@ -2,14 +2,18 @@
 #include"../OSGStudyProject/comdepen.h"
 #ifdef _DEBUG
 #pragma comment(lib,"../x64/Debug/osgAddDepen.lib")
+#pragma comment(lib,"../x64/Debug/osgReMatrixOperations.lib")
 #else
 #pragma comment(lib,"../x64/Release/osgAddDepen.lib")
+#pragma comment(lib,"../x64/Release/osgReMatrixOperations.lib")
 #endif // _DEBUG
 
+#include"../osgReMatrixOperations/NodeMatrix.h"
 #include<osgGA/StandardManipulator>
 #include<osgViewer/Viewer>
 #include<osgViewer/ViewerEventHandlers>
 #include<osgDB/ReadFile>
+
 
 class TravelManipulator :public osgGA::StandardManipulator
 {
@@ -27,10 +31,15 @@ public:
 	virtual void getTransformation(osg::Vec3d & eye, osg::Quat & rotation) const override;
 	virtual void getTransformation(osg::Vec3d & eye, osg::Vec3d & center, osg::Vec3d & up) const override;
 	virtual bool  handle(const osgGA::GUIEventAdapter &ea, osgGA::GUIActionAdapter &us);
+protected:
+	void changePostion(const osg::Vec3& step);
+	void changeViewAngle(const osg::Vec3& angle);
 private:
 	osg::Vec3 m_vPosition;
-	osg::Vec3 orientation;
-	int steplength;
-	float rotatelength;
+	osg::Vec3 m_vRotate;
+	int m_vStep;
+	float m_vRotateStep;
+	float m_iLeftX;
+	float m_iLeftY;
 };
 
