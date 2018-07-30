@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "osgReMatrixOperations", "os
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "osgTravel", "osgTravel\osgTravel.vcxproj", "{E98192EA-D11F-405D-90E5-DFE27FFDCB0C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "osgHits", "osgHits\osgHits.vcxproj", "{15BEB379-716F-4BBC-98D3-3B59F0187C98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -87,6 +89,14 @@ Global
 		{E98192EA-D11F-405D-90E5-DFE27FFDCB0C}.Release|x64.Build.0 = Release|x64
 		{E98192EA-D11F-405D-90E5-DFE27FFDCB0C}.Release|x86.ActiveCfg = Release|Win32
 		{E98192EA-D11F-405D-90E5-DFE27FFDCB0C}.Release|x86.Build.0 = Release|Win32
+		{15BEB379-716F-4BBC-98D3-3B59F0187C98}.Debug|x64.ActiveCfg = Debug|x64
+		{15BEB379-716F-4BBC-98D3-3B59F0187C98}.Debug|x64.Build.0 = Debug|x64
+		{15BEB379-716F-4BBC-98D3-3B59F0187C98}.Debug|x86.ActiveCfg = Debug|Win32
+		{15BEB379-716F-4BBC-98D3-3B59F0187C98}.Debug|x86.Build.0 = Debug|Win32
+		{15BEB379-716F-4BBC-98D3-3B59F0187C98}.Release|x64.ActiveCfg = Release|x64
+		{15BEB379-716F-4BBC-98D3-3B59F0187C98}.Release|x64.Build.0 = Release|x64
+		{15BEB379-716F-4BBC-98D3-3B59F0187C98}.Release|x86.ActiveCfg = Release|Win32
+		{15BEB379-716F-4BBC-98D3-3B59F0187C98}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
