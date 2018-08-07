@@ -9,6 +9,7 @@
 #include<osgViewer/Viewer>
 #include<osgDB/ReadFile>
 #include<osg/ShapeDrawable>
+#include<osg/LineSegment>
 
 osg::ref_ptr<osg::Geode> CreateSquareBox();
 
@@ -23,12 +24,16 @@ int main() {
 	/*group->addChild(osgDB::readNodeFile("glider.osg"));*/
 	group->addChild(CreateSquareBox().get());
 
+	/*参考accept源码方法*/
 	group->accept(*inVisitor.get());
 	/*输出所有的交点*/
 	if (lineInter->containsIntersections()) {
 		intersections = lineInter->getIntersections();
 		for (osgUtil::LineSegmentIntersector::Intersections::iterator iter = intersections.begin(); iter != intersections.end(); iter++) {
+			/*交点向量*/
 			std::cout << iter->getWorldIntersectPoint().x() << "\t" << iter->getWorldIntersectPoint().y() << "\t" << iter->getWorldIntersectPoint().z() << std::endl;
+			/*交点单位向量*/
+			std::cout << iter->getWorldIntersectNormal().x() << "\t" << iter->getWorldIntersectNormal().y() << "\t" << iter->getWorldIntersectNormal().z() << std::endl;
 		}
 	}
 
@@ -40,6 +45,17 @@ int main() {
 osg::ref_ptr<osg::Geode> CreateSquareBox()
 {
 	osg::ref_ptr<osg::Geode> box = new osg::Geode;
+
+	osg::ref_ptr<osg::Geometry> geo = new osg::Geometry;
+	osg::ref_ptr<osg::Vec3Array> lineArray = new osg::Vec3Array;
+
+	geo->addPrimitiveSet(new osg::DrawArrays(osg::PrimitiveSet::LINES, 0, 2));
+	geo->setVertexArray(lineArray.get());
+	lineArray->push_back(osg::Vec3(-5.0, 0.0, 0.0));
+	lineArray->push_back(osg::Vec3(5.0, 0.0, 0.0));
+
 	box->addDrawable(new osg::ShapeDrawable(new osg::Box(osg::Vec3(00, 0.0, 0.0), 6.0)));
+	box->addDrawable(geo.get());
+
 	return box;
 }
